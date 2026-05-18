@@ -394,3 +394,29 @@ Network administrators use CLI (Command Line Interface) commands to diagnose iss
 * **Nslookup:** Queries Domain Name System (DNS) servers to find the IP address associated with a domain name (e.g., finding the IP for `google.com`).
 
 ---
+
+Port Numbers:
+
+FTP data - 20
+FTP Control - 21
+SSH - 22
+Telnet - 23
+SMTP - 25
+DNS 53
+DHCP Server - 67 
+DHCP Client - 68
+HTTP - 80
+POP3 - 110
+NTP - 123
+IMAP - 143
+SNMP agent - 161
+SNP Trap - 162
+BGP - 172
+HTTPS - 443
+SMPT over SSL- 465
+RIP - 520
+HA1 - 28769 28260
+HA1 (ENC) - 28
+HA2 - 29281
+
+
