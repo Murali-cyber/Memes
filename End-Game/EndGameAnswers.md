@@ -263,3 +263,134 @@ Access to the firewall is strictly governed by Role-Based Access Control (RBAC):
 * **Custom Roles:** Tailored profiles where you explicitly allow or deny access to specific tabs, sub-menus, or command-line capabilities (e.g., a "Helpdesk" role that can only clear user sessions and view logs).
 
 ---
+
+# Networking
+---
+
+## 1. Networks, Types, and Topologies
+
+A **network** consists of two or more computers connected together to share resources and data.
+
+### Network Types
+
+* **LAN (Local Area Network):** Covers a small geographic area like a home, office, or building. High data transfer rates.
+* **MAN (Metropolitan Area Network):** Covers a larger geographic area like a town or city.
+* **WAN (Wide Area Network):** Connects LANs and MANs across countries or continents (e.g., the Internet).
+
+### Network Topologies (Layouts)
+
+* **Star:** All devices connect to a central hub/switch. If the hub fails, the network goes down.
+* **Mesh:** Every device connects to every other device. High redundancy, very expensive.
+* **Bus:** Devices share a single backbone cable. Simple but creates a single point of failure.
+* **Ring:** Devices are connected in a circular loop. Data travels in one direction.
+
+---
+
+## 2. The OSI Model
+
+The **OSI (Open Systems Interconnection) Model** is a 7-layer conceptual framework used to understand how data moves across a network.
+
+| Layer Number | Layer Name | Data Unit (PDU) | Function / Example |
+| --- | --- | --- | --- |
+| **7** | **Application** | Data | User interface & network services (HTTP, FTP, SSH) |
+| **6** | **Presentation** | Data | Encryption, compression, and formatting (JPEG, SSL) |
+| **5** | **Session** | Data | Manages sessions between applications |
+| **4** | **Transport** | Segments (TCP) / Datagrams (UDP) | End-to-end connections, flow control, error recovery |
+| **3** | **Network** | Packets | Path determination and logical addressing (IP, Routers) |
+| **2** | **Data Link** | Frames | Physical addressing (MAC addresses, Switches) |
+| **1** | **Physical** | Bits | Binary transmission over cables/fiber/wireless |
+
+---
+
+## 3. Switching: VLAN, VTP, and STP
+
+A **Switch** operates at Layer 2 (Data Link) and uses **MAC addresses** to forward data only to the specific destination device.
+
+* **VLAN (Virtual LAN):** Logically segments a single physical switch into multiple isolated virtual networks to improve security and reduce traffic congestion.
+* **VTP (VLAN Trunking Protocol):** A Cisco-proprietary protocol that allows a network administrator to manage (add, delete, rename) VLANs across an entire network from a single central switch.
+* **STP (Spanning Tree Protocol):** Prevents network loops in a switched network with redundant paths by dynamically disabling specific ports, ensuring there is only one active path between any two devices.
+
+---
+
+## 4. Routing and Routing Protocols
+
+A **Router** operates at Layer 3 (Network) and forwards data packets between different networks using **IP addresses**.
+
+### Administrative Distance (AD)
+
+When a router learns about a destination from multiple sources, it uses **Administrative Distance (AD)** to choose the best path. **Lower AD values are more trusted.**
+
+| Routing Method / Protocol | Default AD Value | Description |
+| --- | --- | --- |
+| **Connected Interface** | 0 | Directly attached network |
+| **Static Route** | 1 | Manually configured by an administrator |
+| **EIGRP (Internal)** | 90 | Cisco-proprietary hybrid protocol |
+| **OSPF** | 110 | Open standard Link-State protocol (very common) |
+| **RIP** | 120 | Distance-Vector protocol based on hop count |
+| **External BGP (eBGP)** | 20 | Used to route data across the global Internet |
+
+---
+
+## 5. Subnetting
+
+**Subnetting** is the process of dividing a single large network into smaller, more manageable sub-networks (subnets). It conserves IP addresses, reduces broadcast traffic, and enhances security.
+
+* **Subnet Mask:** A 32-bit number that distinguishes the network portion from the host portion of an IP address.
+* **CIDR Notation:** Classless Inter-Domain Routing (e.g., `/24`), which indicates how many bits are used for the network portion.
+
+> **Example:** A `/24` subnet mask is $255.255.255.0$, meaning 24 bits belong to the network, leaving 8 bits for hosts ($2^8 - 2 = 254$ usable host IPs).
+
+---
+
+## 6. IP Addresses and Types
+
+An **IP (Internet Protocol) Address** is a unique identifier assigned to a device on a network.
+
+### IPv4 vs. IPv6
+
+* **IPv4:** 32-bit address written in decimal (e.g., `192.168.1.1`). Total addresses: $\approx 4.3 \text{ billion}$.
+* **IPv6:** 128-bit address written in hexadecimal (e.g., `2001:db8::ff00:42:8329`). Created because the world ran out of IPv4 addresses.
+
+### Public vs. Private IP Addresses
+
+* **Public IP:** Globally unique, routable over the Internet, assigned by ISPs.
+* **Private IP:** Used inside local networks (LANs). They are not routable on the internet.
+* *Class A:* `10.0.0.0` to `10.255.255.255`
+* *Class B:* `172.16.0.0` to `172.31.255.255`
+* *Class C:* `192.168.0.0` to `192.168.255.255`
+
+
+
+---
+
+## 7. Common Network Protocols
+
+Network protocols are standardized sets of rules that allow devices to communicate.
+
+### Transport Layer Protocols
+
+* **TCP (Transmission Control Protocol):** Connection-oriented. Reliable, guarantees delivery via a "3-way handshake," but is slower (used for Web, Email).
+* **UDP (User Datagram Protocol):** Connectionless. Unreliable, does not guarantee delivery, but is faster (used for Streaming, Gaming, VoIP).
+
+### Application & Management Protocols
+
+* **ICMP (Internet Control Message Protocol):** Used by network devices to send error messages and operational information (e.g., Ping).
+* **NTP (Network Time Protocol) [Port 123]:** Synchronizes clocks between computer systems.
+* **FTP (File Transfer Protocol) [Ports 20/21]:** Used for transferring files between a client and server.
+* **SNMP (Simple Network Management Protocol) [Ports 161/162]:** Used for monitoring and managing network devices.
+* **SSH (Secure Shell) [Port 22]:** Allows secure, encrypted remote access to devices.
+* **DHCP (Dynamic Host Configuration Protocol) [Ports 67/68]:** Automatically assigns IP addresses to devices on a network.
+* **HTTP (Hypertext Transfer Protocol) [Port 80]:** Unencrypted protocol used for transmitting web pages.
+* **HTTPS (HTTP Secure) [Port 443]:** Encrypted web traffic using SSL/TLS.
+
+---
+
+## 8. Network Troubleshooting Tools
+
+Network administrators use CLI (Command Line Interface) commands to diagnose issues:
+
+* **Ping:** Uses **ICMP** echo requests to test basic connectivity between your device and a target IP/domain.
+* **Traceroute (or `tracert` on Windows):** Tracks the exact path a packet takes to reach a destination, listing every router (hop) along the way.
+* **Nslookup:** Queries Domain Name System (DNS) servers to find the IP address associated with a domain name (e.g., finding the IP for `google.com`).
+
+---
