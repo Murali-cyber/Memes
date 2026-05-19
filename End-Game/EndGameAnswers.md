@@ -564,7 +564,7 @@ Admins can schedule automated compliance and executive reports (e.g., ISO 27001 
 - IMAP - 143
 - SNMP agent - 161
 - SNMP Trap - 162
-- BGP - 172
+- BGP - 179
 - LDAP - 389
 - HTTPS - 443
 - SMPT over SSL- 465
