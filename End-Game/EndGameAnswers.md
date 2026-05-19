@@ -548,6 +548,8 @@ Admins can schedule automated compliance and executive reports (e.g., ISO 27001 
 
 ## Port Numbers
 
+- TCP - 6
+- UDP -17
 - FTP data - 20
 - FTP Control - 21
 - SSH - 22
@@ -561,13 +563,16 @@ Admins can schedule automated compliance and executive reports (e.g., ISO 27001 
 - NTP - 123
 - IMAP - 143
 - SNMP agent - 161
-- SNP Trap - 162
+- SNMP Trap - 162
 - BGP - 172
+- LDAP - 389
 - HTTPS - 443
 - SMPT over SSL- 465
 - RIP - 520
+- RDP - 3389
 - HA1 - 28769 28260
 - HA1 (ENC) - 28
 - HA2 - 99 29281 
 
 
+  
